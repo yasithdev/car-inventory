@@ -46,7 +46,7 @@ class CarListItem extends React.Component<CombinedProps, OwnState> {
         <td><span>{make}</span></td>
         <td><span>{model}</span></td>
         <td><span>{year}</span></td>
-        <td><span><button className="btn btn-success btn-sm"><i className="fas fa-pencil fa-sm fa-fw" /></button></span></td>
+        <td><span><button className="btn btn-success btn-sm"><i className="fas fa-edit fa-sm fa-fw" /></button></span></td>
         <td><span><button className="btn btn-success btn-sm"><i className="fas fa-trash fa-sm fa-fw" /></button></span></td>
       </tr>
     );

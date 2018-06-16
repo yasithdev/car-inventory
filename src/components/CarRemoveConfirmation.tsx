@@ -29,7 +29,7 @@ interface OwnState {
 
 type CombinedProps = StoreProps & DispatchProps & OwnProps;
 
-class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
+class CarRemoveConfirmation extends React.Component<CombinedProps, OwnState> {
   constructor(props: CombinedProps) {
     super(props);
     // Initially set all variables to empty
@@ -174,4 +174,4 @@ const wrapper = connect<StoreProps, DispatchProps, OwnProps>(
   mapDispatchToProps
 );
 
-export default wrapper(CarEntryDialog);
+export default wrapper(CarRemoveConfirmation);

@@ -1,10 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as Redux from "redux";
-import * as UUID from "uuid";
 import { Car, ApplicationState } from "../data/models";
 import { addCar } from "../data/actions";
 import CarListItem from "./CarListItem";
+import CarEntryDialog from "./CarEntryDialog";
 
 // Properties to get from Redux Store
 interface StoreProps {
@@ -33,16 +33,12 @@ class CarContainer extends React.Component<CombinedProps, OwnState> {
     super(props);
   }
 
-  handleAddCar(event) : void {
-    let car : Car = {make : "test", manufacturer: "test", model : "test", year : 2018};
-    this.props.insertCar(car);
-  }
-
   render(): JSX.Element {
     return (
       <div className="container">
       {/* Table showing the contents */}
-      <table>
+      <button data-target="#carInsertModal" data-toggle="modal" className="btn btn-sm btn-success float-right">Add</button>
+      <table className="table table-sm table-striped table-hover">
         <thead>
           <tr>
             <th>Manufacturer</th>
@@ -58,7 +54,8 @@ class CarContainer extends React.Component<CombinedProps, OwnState> {
           {this.props.children}
         </tbody>
       </table>
-      <button className="btn btn-sm btn-success" onClick={this.handleAddCar.bind(this)}>Add</button>
+      <CarEntryDialog id="carInsertModal" mode="insert" onSave={this.props.insertCar}/>
+      <CarEntryDialog id="carUpdateModal" mode="update" onSave={this.props.insertCar}/>
       </div>
     );
   }

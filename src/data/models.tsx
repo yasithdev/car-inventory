@@ -2,6 +2,7 @@ import { Action } from "redux";
 
 // Structure of Car
 export interface Car {
+  id : String;
   manufacturer: String;
   make: String;
   model: String;
