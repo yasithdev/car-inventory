@@ -81,24 +81,20 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
     let value: String = event.currentTarget.value;
     switch (key) {
       case "manufacturer": {
-        console.log("manufacturer");
         this.setState({
           newCar: { ...this.state.newCar, manufacturer: value }
         });
         break;
       }
       case "make": {
-        console.log("make");
         this.setState({ newCar: { ...this.state.newCar, make: value } });
         break;
       }
       case "model": {
-        console.log("model");
         this.setState({ newCar: { ...this.state.newCar, model: value } });
         break;
       }
       case "year": {
-        console.log("year");
         this.setState({
           newCar: { ...this.state.newCar, year: Number(value) }
         });

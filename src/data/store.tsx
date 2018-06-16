@@ -9,7 +9,7 @@ const initialState: ApplicationState = {
 
 // Root Reducer for all actions in the application
 function reduce (state: ApplicationState = initialState, action: StoreAction) : ApplicationState {
-  let nextState;
+  let nextState = state;
   switch (action.type) {
     case ADD_CAR: {
       // Return all cars plus the new one
@@ -21,22 +21,30 @@ function reduce (state: ApplicationState = initialState, action: StoreAction) : 
     }
     case UPDATE_CAR: {
       // Return all cars along with the updated (merged) car
-      nextState = {
-        ...state,
-        cars: [...state.cars, action.payload]
-      };
+      let current = state.cars.filter(c => c.id === action.payload.id)[0];
+      if(current){
+        let index = state.cars.indexOf(current);
+        let newCars = [...state.cars];
+        newCars[index] = action.payload;
+        nextState = {
+          ...state,
+          cars: newCars
+        };
+      }
       break;
     }
     case DELETE_CAR: {
       // Return all cars except the deleted one
-      nextState = {
-        ...state,
-        cars: [...state.cars, action.payload]
-      };
-      break;
-    }
-    default: {
-      nextState = state;
+      let current = state.cars.filter(c => c.id === action.payload.id)[0];
+      if(current){
+        let index = state.cars.indexOf(current);
+        let newCars = [...state.cars];
+        newCars.splice(index, 1);
+        nextState = {
+          ...state,
+          cars: newCars
+        };
+      }
       break;
     }
   }
