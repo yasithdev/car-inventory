@@ -11,7 +11,7 @@ interface StoreProps {
   cars: Car[];
 }
 
-// Properties to get for Redux Dispactch
+// Properties to get for Redux Dispatch
 interface DispatchProps {
   insertCar: (car: Car) => void;
 }
@@ -21,7 +21,7 @@ export interface OwnProps {
   // No properties
 }
 
-// State inside the (if stateful) component
+// State inside (if stateful) Component
 interface OwnState {
   // No properties
 }
@@ -54,7 +54,7 @@ class CarContainer extends React.Component<CombinedProps, OwnState> {
           </tr>
         </thead>
         <tbody>
-          {this.props.cars.map(car => <CarListItem car={car} />)}
+          {this.props.cars.map(car => <CarListItem key={`${car.manufacturer}${car.model}${car.make}${car.year}`} car={car} />)}
           {this.props.children}
         </tbody>
       </table>

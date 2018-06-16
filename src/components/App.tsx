@@ -2,21 +2,20 @@ import * as React from "react";
 import CarContainer from "./CarContainer";
 
 export interface AppProps {
-  compiler: string;
-  framework: string;
+  title: string;
 }
 
 export class App extends React.Component<AppProps, {}> {
   render() {
     return (
       <div className="container">
-        <h1>
-          Hello from {this.props.compiler} and {this.props.framework}!
+        <h1 className="text-center">
+          {this.props.title}
         </h1>
-        {this.props.children}
         <div className="row">
             <CarContainer/>
         </div>
+        {this.props.children}
       </div>
     );
   }

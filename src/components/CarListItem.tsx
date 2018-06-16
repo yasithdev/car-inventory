@@ -21,7 +21,7 @@ export interface OwnProps {
   car: Car;
 }
 
-// State inside the (if stateful) component
+// State inside (if stateful) component
 interface OwnState {
   // No properties
 }

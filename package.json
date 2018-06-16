@@ -5,8 +5,8 @@
   "repository": "git://github.com",
   "main": "./src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --colors --open --port 3000",
-    "build": "webpack --config webpack.config.js --watch"
+    "start": "webpack --watch --mode=development & webpack-dev-server --hot",
+    "build": "webpack --mode=production"
   },
   "author": "YJ",
   "license": "MIT",
