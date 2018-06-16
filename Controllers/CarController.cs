@@ -41,14 +41,14 @@ namespace coding.Controllers
                     JsonSerializer serializer = new JsonSerializer();
                     carsList = (List<Car>)serializer.Deserialize(file, typeof(List<Car>));
                 }
-                foreach (var c in carsList) {
-                    _context.Cars.Add(c);
+                foreach (Car c in carsList) {
+                    _context.Cars.Add(new Car { Id =c.Id,Manufacturer = c.Manufacturer,Make=c.Make,Model=c.Model,Year=c.Year });
                 }
                 _context.SaveChanges();
             }catch(Exception e){
                 Console.WriteLine("Exception information: {0}", e);
                 //In case ofan exception, 3 cars still wold be added to the _context
-                AddCarsToContext();
+                // AddCarsToContext();
             }
             return _context.Cars.ToList();
         }
@@ -75,6 +75,7 @@ namespace coding.Controllers
         [HttpGet]
         public ActionResult<List<Car>> GetAll()
         {
+            WriteToJSONfile();
             return _context.Cars.ToList();
         }
 
@@ -94,6 +95,16 @@ namespace coding.Controllers
         [HttpPost]
         public IActionResult Create(Car car)
         {
+            Console.WriteLine("\n\n\n\n NEW CAR ID = "+car.Id+"\n\n\n\n");
+            if(car.Id == 0){
+                car.Id=1;
+            }
+            Console.WriteLine("\n\n\n\n AFTER - NEW CAR ID = "+car.Id+"\n\n\n\n");
+            var item = _context.Cars.Find(car.Id);
+            while(item!=null){
+                car.Id = car.Id+1;
+                item = _context.Cars.Find(car.Id);
+            }
             _context.Cars.Add(car);
             _context.SaveChanges();
             WriteToJSONfile();
@@ -113,7 +124,7 @@ namespace coding.Controllers
 
             car.Manufacturer = item.Manufacturer;
             car.Make = item.Make;
-            car.Manufacturer = item.Manufacturer;
+            car.Model = item.Model;
             car.Year = item.Year;
 
             _context.Cars.Update(car);
