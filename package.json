@@ -5,7 +5,7 @@
   "repository": "git://github.com",
   "main": "./src/index.js",
   "scripts": {
-    "start": "webpack --watch --mode=development & webpack-dev-server --hot",
+    "start": "webpack --watch --mode=development & webpack-dev-server --hot --mode=development",
     "build": "webpack --mode=production"
   },
   "author": "YJ",

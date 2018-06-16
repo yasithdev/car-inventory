@@ -40,7 +40,7 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
     };
   }
 
-  handleEntry = (event) => {
+  handleEntry = event => {
     let manufacturer = this.refs.manufacturer["value"];
     let make = this.refs.make["value"];
     let model = this.refs.model["value"];
@@ -49,7 +49,7 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
       { newCar: { ...this.state.newCar, manufacturer, make, model, year } },
       () => this.props.onSave(this.state.newCar)
     );
-  }
+  };
 
   getTitle = () =>
     this.props.mode == "insert" ? "Add New Item" : "Update Item";
@@ -130,7 +130,7 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-primary px-3"
                 data-dismiss="modal"
                 onClick={this.handleEntry}
               >
@@ -138,7 +138,7 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
               </button>
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-secondary px-3"
                 data-dismiss="modal"
               >
                 Close

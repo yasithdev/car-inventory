@@ -9,11 +9,9 @@ export class App extends React.Component<AppProps, {}> {
   render() {
     return (
       <div className="container">
-        <h1 className="text-center">
-          {this.props.title}
-        </h1>
+        <h1 className="text-center">{this.props.title}</h1>
         <div className="row">
-            <CarContainer/>
+          <CarContainer />
         </div>
         {this.props.children}
       </div>
