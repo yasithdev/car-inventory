@@ -21,14 +21,19 @@ export interface OwnProps {
   // No properties
 }
 
+// State inside the (if stateful) component
+interface OwnState {
+  // No properties
+}
+
 type CombinedProps = StoreProps & DispatchProps & OwnProps;
 
-class CarContainer extends React.Component<CombinedProps, {}> {
+class CarContainer extends React.Component<CombinedProps, OwnState> {
   constructor(props: CombinedProps) {
     super(props);
   }
 
-  handleAddCar(event) {
+  handleAddCar(event) : void {
     let car : Car = {make : "test", manufacturer: "test", model : "test", year : 2018};
     this.props.insertCar(car);
   }

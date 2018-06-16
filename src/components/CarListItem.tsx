@@ -21,14 +21,19 @@ export interface OwnProps {
   car: Car;
 }
 
+// State inside the (if stateful) component
+interface OwnState {
+  // No properties
+}
+
 type CombinedProps = StoreProps & DispatchProps & OwnProps;
 
-class CarListItem extends React.Component<CombinedProps, {}> {
+class CarListItem extends React.Component<CombinedProps, OwnState> {
   constructor(props: CombinedProps) {
     super(props);
   }
 
-  handleDelete(event) {
+  handleDelete(event) : void {
     const { manufacturer, make, model, year } = this.props.car;
     const id = UUID.v4();
   }
