@@ -6,7 +6,7 @@ export interface AppProps {
 }
 
 export class App extends React.Component<AppProps, {}> {
-  render() {
+  render(): JSX.Element {
     return (
       <div className="container">
         <h1 className="text-center">{this.props.title}</h1>

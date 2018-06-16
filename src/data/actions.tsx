@@ -1,4 +1,4 @@
-import { ADD_CAR, DELETE_CAR, UPDATE_CAR, GET_INVENTORY} from "./constants";
+import { ADD_CAR, DELETE_CAR, LOAD_INVENTORY, UPDATE_CAR } from "./constants";
 import { Car, StoreAction } from "./models";
 
 // Template Add New Car to Redux Store
@@ -26,9 +26,9 @@ export const deleteCar = function(car: Car): StoreAction {
 };
 
 // Template that gets remote inventory and updates current
-export const getInventory = function(cars : Car[]) : StoreAction {
+export const loadInventory = function(cars: Car[]): StoreAction {
   return {
-    type : GET_INVENTORY,
-    payload : cars
+    type: LOAD_INVENTORY,
+    payload: cars
   };
 };

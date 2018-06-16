@@ -2,7 +2,7 @@ import { Action } from "redux";
 
 // Structure of Car
 export interface Car {
-  id : Number;
+  id: Number;
   manufacturer: String;
   make: String;
   model: String;
@@ -12,7 +12,7 @@ export interface Car {
 // Structure of Application State
 export interface ApplicationState {
   cars: Car[];
-};
+}
 
 // Structure of Store Action
 export interface StoreAction<T = String, V = any> extends Action<T> {

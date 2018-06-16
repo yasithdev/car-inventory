@@ -1,7 +1,7 @@
 import { createStore, Store } from "redux";
-import { getInventory } from "./actions";
-import { ADD_CAR, DELETE_CAR, GET_INVENTORY, UPDATE_CAR } from "./constants";
-import { ApplicationState, Car, StoreAction } from "./models";
+import { loadInventory } from "./actions";
+import { ADD_CAR, DELETE_CAR, LOAD_INVENTORY, UPDATE_CAR } from "./constants";
+import { ApplicationState, StoreAction } from "./models";
 import * as req from "./req";
 
 const initialState: ApplicationState = {
@@ -54,8 +54,8 @@ function reduce(
       }
       break;
     }
-    case GET_INVENTORY: {
-      // Get Inventory from remote// Return all cars plus the new one
+    case LOAD_INVENTORY: {
+      // Reload inventory with new data
       nextState = {
         ...state,
         cars: action.payload
@@ -71,10 +71,10 @@ const store: Store<ApplicationState, StoreAction<String, any>> = createStore(
 );
 
 export const init = () => {
-  req.getInventory((cars) => {
-    store.dispatch(getInventory(cars))
+  req.getInventory(cars => {
+    store.dispatch(loadInventory(cars));
   });
-}
+};
 
 init();
 export default store;

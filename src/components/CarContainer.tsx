@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as Redux from "redux";
 import { addCar, deleteCar, updateCar } from "../data/actions";
 import { ApplicationState, Car } from "../data/models";
+import CarDetailsDialog from "./CarDetailsDialog";
 import CarEntryDialog from "./CarEntryDialog";
 import CarListItem from "./CarListItem";
 import CarRemoveDialog from "./CarRemoveDialog";
@@ -71,6 +72,7 @@ class CarContainer extends React.Component<CombinedProps, OwnState> {
                 notifySelected={this.handleCarSelected}
                 editTarget="#carUpdateModal"
                 deleteTarget="#carRemoveModal"
+                viewTarget="#carDetailsModal"
               />
             ))}
             {this.props.children}
@@ -92,6 +94,7 @@ class CarContainer extends React.Component<CombinedProps, OwnState> {
           onConfirm={this.props.deleteCar}
           car={this.state.selectedCar}
         />
+        <CarDetailsDialog id="carDetailsModal" car={this.state.selectedCar} />
       </div>
     );
   }

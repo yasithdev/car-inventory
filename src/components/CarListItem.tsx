@@ -18,9 +18,10 @@ interface DispatchProps {
 // Properties external to Redux Store
 export interface OwnProps {
   car: Car;
-  editTarget : String;
-  deleteTarget : String;
-  notifySelected : (car : Car) => void;
+  editTarget: String;
+  deleteTarget: String;
+  viewTarget: String;
+  notifySelected: (car: Car) => void;
 }
 
 // State inside (if stateful) component
@@ -35,22 +36,21 @@ class CarListItem extends React.Component<CombinedProps, OwnState> {
     super(props);
   }
 
-  notifyEditSelect = (event) => {
-    // Notify that this car was selected for edit
+  notifySelect = event => {
+    // Notify that this car was selected
     this.props.notifySelected(this.props.car);
-  }
-
-  notifyDeleteSelect = (event) => {
-    // Notify that this car was selected for delete
-    this.props.notifySelected(this.props.car);
-  }
+  };
 
   render(): JSX.Element {
     const { manufacturer, make, model, year } = this.props.car;
     return (
       <tr>
         <td>
-          <span>{manufacturer}</span>
+          <span>
+            <a href="" onClick={this.notifySelect} data-toggle="modal" data-target={this.props.viewTarget}>
+              {manufacturer}
+            </a>
+          </span>
         </td>
         <td>
           <span>{make}</span>
@@ -63,14 +63,24 @@ class CarListItem extends React.Component<CombinedProps, OwnState> {
         </td>
         <td>
           <span>
-            <button className="btn btn-secondary btn-sm w-100" onClick={this.notifyEditSelect} data-target={this.props.editTarget} data-toggle="modal">
+            <button
+              className="btn btn-secondary btn-sm w-100"
+              onClick={this.notifySelect}
+              data-target={this.props.editTarget}
+              data-toggle="modal"
+            >
               <i className="fas fa-edit fa-sm fa-fw" />
             </button>
           </span>
         </td>
         <td>
           <span>
-            <button className="btn btn-secondary btn-sm w-100" onClick={this.notifyDeleteSelect} data-target={this.props.deleteTarget} data-toggle="modal">
+            <button
+              className="btn btn-secondary btn-sm w-100"
+              onClick={this.notifySelect}
+              data-target={this.props.deleteTarget}
+              data-toggle="modal"
+            >
               <i className="fas fa-trash fa-sm fa-fw" />
             </button>
           </span>

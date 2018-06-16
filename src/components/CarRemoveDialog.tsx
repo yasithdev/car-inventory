@@ -39,7 +39,7 @@ class CarRemoveDialog extends React.Component<CombinedProps, OwnState> {
   title = "Remove Item";
   subtitle = "Are you sure you want to remove this item?";
 
-  render() {
+  render(): JSX.Element {
     return (
       <div
         id={this.props.id}

@@ -16,14 +16,12 @@ interface DispatchProps {
 // Properties external to Redux Store
 export interface OwnProps {
   id: string;
-  mode: "insert" | "update";
   car?: Car;
-  onSave: (car: Car) => void;
 }
 
 // State inside (if stateful) component
 interface OwnState {
-  newCar: Car;
+  // No properties
 }
 
 type CombinedProps = StoreProps & DispatchProps & OwnProps;
@@ -31,76 +29,10 @@ type CombinedProps = StoreProps & DispatchProps & OwnProps;
 class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
   constructor(props: CombinedProps) {
     super(props);
-    // Initially set all variables to empty
-    this.state = {
-      newCar: this.props.car ? { ...this.props.car } : this.newCarState()
-    };
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    // Either set the modifying car's props or blank props as state, when component is updated
-    if (this.props != nextProps) {
-      if (nextProps.mode === "update" && nextProps.car) {
-        nextState.newCar = { ...nextProps.car };
-      } else if (nextProps.mode === "insert") {
-        nextState.newCar = this.newCarState();
-      }
-    }
-  }
-
-  newCarState = (): Car => {
-    return { id: 0, manufacturer: "", make: "", model: "", year: 2018 };
-  };
-
-  handleEntry = event => {
-    let id = this.state.newCar.id;
-    let manufacturer = this.refs.manufacturer["value"];
-    let make = this.refs.make["value"];
-    let model = this.refs.model["value"];
-    let year = this.refs.year["value"];
-    let newCar = { id, manufacturer, make, model, year };
-    this.props.onSave({
-      ...this.state.newCar,
-      manufacturer,
-      make,
-      model,
-      year
-    });
-  };
-
-  getTitle = () =>
-    this.props.mode == "insert" ? "Add New Item" : "Update Item";
-  getSubtitle = () =>
-    this.props.mode == "insert"
-      ? "Enter item details and click on Save to Add."
-      : "Please update the details and click on Save.";
-
-  updateState = (event): void => {
-    let key: String = event.currentTarget.id;
-    let value: String = event.currentTarget.value;
-    switch (key) {
-      case "manufacturer": {
-        this.setState({
-          newCar: { ...this.state.newCar, manufacturer: value }
-        });
-        break;
-      }
-      case "make": {
-        this.setState({ newCar: { ...this.state.newCar, make: value } });
-        break;
-      }
-      case "model": {
-        this.setState({ newCar: { ...this.state.newCar, model: value } });
-        break;
-      }
-      case "year": {
-        this.setState({
-          newCar: { ...this.state.newCar, year: Number(value) }
-        });
-        break;
-      }
-    }
-  };
+  getTitle = () => "Car Details";
+  getSubtitle = () => "The car details are given below";
 
   render(): JSX.Element {
     return (
@@ -132,11 +64,15 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
                     <td>Manufacturer</td>
                     <td>
                       <input
+                        disabled
                         id="manufacturer"
                         ref="manufacturer"
                         type="text"
-                        value={this.state.newCar.manufacturer.toString()}
-                        onChange={this.updateState}
+                        value={
+                          this.props.car
+                            ? this.props.car.manufacturer.toString()
+                            : ""
+                        }
                       />
                     </td>
                   </tr>
@@ -144,11 +80,13 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
                     <td>Make</td>
                     <td>
                       <input
+                        disabled
                         id="make"
                         ref="make"
                         type="text"
-                        value={this.state.newCar.make.toString()}
-                        onChange={this.updateState}
+                        value={
+                          this.props.car ? this.props.car.make.toString() : ""
+                        }
                       />
                     </td>
                   </tr>
@@ -156,11 +94,13 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
                     <td>Model</td>
                     <td>
                       <input
+                        disabled
                         id="model"
                         ref="model"
                         type="text"
-                        value={this.state.newCar.model.toString()}
-                        onChange={this.updateState}
+                        value={
+                          this.props.car ? this.props.car.model.toString() : ""
+                        }
                       />
                     </td>
                   </tr>
@@ -168,11 +108,13 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
                     <td>Year</td>
                     <td>
                       <input
+                        disabled
                         id="year"
                         ref="year"
                         type="number"
-                        value={this.state.newCar.year.toString()}
-                        onChange={this.updateState}
+                        value={
+                          this.props.car ? this.props.car.year.toString() : ""
+                        }
                       />
                     </td>
                   </tr>
@@ -184,16 +126,8 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
                 type="button"
                 className="btn btn-primary px-3"
                 data-dismiss="modal"
-                onClick={this.handleEntry}
               >
-                Save
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary px-3"
-                data-dismiss="modal"
-              >
-                Close
+                OK
               </button>
             </div>
           </div>

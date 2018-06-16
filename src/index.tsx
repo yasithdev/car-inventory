@@ -6,7 +6,7 @@ import Store from "./data/store";
 
 ReactDOM.render(
   <Provider store={Store}>
-    <App title="Car Inventory"/>
+    <App title="Car Inventory" />
   </Provider>,
   document.getElementById("example")
 );
