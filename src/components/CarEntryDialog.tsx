@@ -52,6 +52,10 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
     return { id: 0, manufacturer: "", make: "", model: "", year: 2018 };
   };
 
+  initState = () => {
+    this.setState({newCar : this.newCarState()});
+  }
+
   handleEntry = event => {
     let id = this.state.newCar.id;
     let manufacturer = this.refs.manufacturer["value"];
@@ -66,6 +70,7 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
       model,
       year
     });
+    this.initState();
   };
 
   getTitle = () =>
@@ -118,6 +123,7 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
                 type="button"
                 className="close"
                 data-dismiss="modal"
+                onClick={(event) => this.initState()}
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
@@ -191,6 +197,7 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
               <button
                 type="button"
                 className="btn btn-secondary px-3"
+                onClick={(event) => this.initState()}
                 data-dismiss="modal"
               >
                 Close
