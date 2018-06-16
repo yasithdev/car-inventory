@@ -9,28 +9,38 @@ const initialState: ApplicationState = {
 
 // Root Reducer for all actions in the application
 function reduce (state: ApplicationState = initialState, action: StoreAction) : ApplicationState {
+  let nextState;
   switch (action.type) {
-    case ADD_CAR:
+    case ADD_CAR: {
       // Return all cars plus the new one
-      return {
+      nextState = {
         ...state,
         cars: [...state.cars, action.payload]
       };
-    case UPDATE_CAR:
+      break;
+    }
+    case UPDATE_CAR: {
       // Return all cars along with the updated (merged) car
-      return {
+      nextState = {
         ...state,
         cars: [...state.cars, action.payload]
       };
-    case DELETE_CAR:
+      break;
+    }
+    case DELETE_CAR: {
       // Return all cars except the deleted one
-      return {
+      nextState = {
         ...state,
         cars: [...state.cars, action.payload]
       };
-    default:
-      return state;
+      break;
+    }
+    default: {
+      nextState = state;
+      break;
+    }
   }
+  return nextState;
 }
 
 const store : Store<ApplicationState, StoreAction<String, any>> = createStore(reduce);

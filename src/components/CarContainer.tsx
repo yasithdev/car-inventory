@@ -28,8 +28,15 @@ class CarContainer extends React.Component<CombinedProps, {}> {
     super(props);
   }
 
+  handleAddCar(event) {
+    let car : Car = {make : "test", manufacturer: "test", model : "test", year : 2018};
+    this.props.insertCar(car);
+  }
+
   render(): JSX.Element {
     return (
+      <div className="container">
+      {/* Table showing the contents */}
       <table>
         <thead>
           <tr>
@@ -42,10 +49,12 @@ class CarContainer extends React.Component<CombinedProps, {}> {
           </tr>
         </thead>
         <tbody>
-          {this.props.cars.forEach(car => <CarListItem car={car} />)}
+          {this.props.cars.map(car => <CarListItem car={car} />)}
           {this.props.children}
         </tbody>
       </table>
+      <button className="btn btn-sm btn-success" onClick={this.handleAddCar.bind(this)}>Add</button>
+      </div>
     );
   }
 }

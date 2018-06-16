@@ -6,7 +6,7 @@ import Store from "./data/store";
 
 ReactDOM.render(
   <Provider store={Store}>
-    <App compiler="TypeScript" framework="React" />,
+    <App compiler="TypeScript" framework="React" />
   </Provider>,
   document.getElementById("example")
 );

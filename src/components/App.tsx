@@ -13,6 +13,7 @@ export class App extends React.Component<AppProps, {}> {
         <h1>
           Hello from {this.props.compiler} and {this.props.framework}!
         </h1>
+        {this.props.children}
         <div className="row">
             <CarContainer/>
         </div>
