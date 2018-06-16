@@ -2,7 +2,7 @@ import { Action } from "redux";
 
 // Structure of Car
 export interface Car {
-  id : String;
+  id : Number;
   manufacturer: String;
   make: String;
   model: String;
@@ -16,5 +16,5 @@ export interface ApplicationState {
 
 // Structure of Store Action
 export interface StoreAction<T = String, V = any> extends Action<T> {
-  payload: V;
+  payload?: V;
 }

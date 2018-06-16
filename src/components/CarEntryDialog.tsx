@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as Redux from "redux";
-import * as UUID from "uuid";
 import { ApplicationState, Car } from "../data/models";
 
 // Properties to get from Redux Store
@@ -50,7 +49,7 @@ class CarEntryDialog extends React.Component<CombinedProps, OwnState> {
   }
 
   newCarState = (): Car => {
-    return { id: UUID.v4(), manufacturer: "", make: "", model: "", year: 2018 };
+    return { id: 0, manufacturer: "", make: "", model: "", year: 2018 };
   };
 
   handleEntry = event => {

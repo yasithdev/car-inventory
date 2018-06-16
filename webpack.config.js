@@ -1,4 +1,18 @@
 module.exports = {
+
+    node: {
+        console: false,
+        global: true,
+        process: true,
+        __filename: 'mock',
+        __dirname: 'mock',
+        Buffer: true,
+        setImmediate: true,
+        fs : 'empty',
+        net : 'empty',
+        tls : 'empty'
+    },
+
     entry: "./src/index.tsx",
     output: {
         filename: "bundle.js",
@@ -37,5 +51,5 @@ module.exports = {
     externals: {
         "react": "React",
         "react-dom": "ReactDOM"
-    }
+    },
 };
