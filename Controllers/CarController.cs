@@ -95,11 +95,9 @@ namespace coding.Controllers
         [HttpPost]
         public IActionResult Create(Car car)
         {
-            Console.WriteLine("\n\n\n\n NEW CAR ID = "+car.Id+"\n\n\n\n");
             if(car.Id == 0){
                 car.Id=1;
             }
-            Console.WriteLine("\n\n\n\n AFTER - NEW CAR ID = "+car.Id+"\n\n\n\n");
             var item = _context.Cars.Find(car.Id);
             while(item!=null){
                 car.Id = car.Id+1;
