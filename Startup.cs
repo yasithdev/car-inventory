@@ -14,6 +14,12 @@ namespace coding
                 opt.UseInMemoryDatabase("CarsList"));
             services.AddMvc()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
         }
 
         public void Configure(IApplicationBuilder app)
@@ -21,6 +27,7 @@ namespace coding
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc();
+            app.UseCors("MyPolicy");
         }
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 using System.Collections.Generic;
 using System.Linq;
 using coding.Models;
@@ -10,6 +11,7 @@ namespace coding.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyPolicy")]
     public class CarController : ControllerBase
     {
         private readonly CarContext _context;
@@ -70,7 +72,7 @@ namespace coding.Controllers
                 }
             }
         }  
-
+        //localhost:5000/api/car
         //Get all cars
         [HttpGet]
         public ActionResult<List<Car>> GetAll()
@@ -91,6 +93,7 @@ namespace coding.Controllers
             return item;
         }   
 
+        //localhost:5000/api/car
         //Create Car
         [HttpPost]
         public IActionResult Create(Car car)
@@ -109,7 +112,7 @@ namespace coding.Controllers
             return CreatedAtRoute("GetCar", new { id = car.Id }, car);
         }  
 
-
+        //localhost:5000/api/car/{id}
         //Edit Method
         [HttpPut("{id}")]
         public IActionResult Update(long id, Car item)
@@ -119,7 +122,7 @@ namespace coding.Controllers
             {
                 return NotFound();
             }
-
+            //send in raw-json body
             car.Manufacturer = item.Manufacturer;
             car.Make = item.Make;
             car.Model = item.Model;
@@ -130,7 +133,7 @@ namespace coding.Controllers
             WriteToJSONfile();
             return NoContent();
         }
-
+        //localhost:5000/api/car/{id}
         //Delete Method
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
