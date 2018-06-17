@@ -15,7 +15,7 @@ namespace coding.Controllers
     public class CarController : ControllerBase
     {
         private readonly CarContext _context;
-        private string _path = Environment.CurrentDirectory+"\\data.json";
+        private string _path = Path.Combine(Environment.CurrentDirectory, "data.json");
         private void AddCarsToContext(){
             _context.Cars.Add(new Car { Manufacturer = "Ford",Make="Mustang",Model="GT",Year=2015 });
             _context.Cars.Add(new Car { Manufacturer = "Chevrolet",Make="Corvette",Model="Z06",Year=2017 });
