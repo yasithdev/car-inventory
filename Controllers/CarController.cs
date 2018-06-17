@@ -29,7 +29,8 @@ namespace coding.Controllers
                 using (StreamWriter file = System.IO.File.CreateText(_path)) 
                 {
                     JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(file, _context.Cars.ToList());
+                    //saves cars preserving the order (ID) of cars
+                    serializer.Serialize(file, _context.Cars.OrderBy(s => s.Id).ToList());
                 }
             }catch(Exception e){
                 Console.WriteLine("Exception information: {0}", e);
@@ -78,7 +79,8 @@ namespace coding.Controllers
         public ActionResult<List<Car>> GetAll()
         {
             WriteToJSONfile();
-            return _context.Cars.ToList();
+            //returns the list of cars preserving the order (ID) of cars
+            return _context.Cars.OrderBy(s => s.Id).ToList();
         }
 
         //Get one car given the ID
