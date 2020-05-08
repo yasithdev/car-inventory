@@ -1,0 +1,10 @@
+# Node.JS Specific
+dist/
+node_modules/
+package-lock.json
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
